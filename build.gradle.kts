@@ -4,6 +4,10 @@
 
 plugins {
     kotlin("multiplatform") version "2.4.20"
+    // Publishing — allows consumers (e.g. the test suites) to use this via mavenLocal.
+    // Multiplatform creates its publications automatically (one per target plus metadata),
+    // so no publishing { } block is needed, and components["java"] doesn't exist here.
+    `maven-publish`
 }
 
 // group + project name give the coordinates "com.qed:QED-Api-Contract:1.0.0",
