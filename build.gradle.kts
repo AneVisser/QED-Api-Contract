@@ -4,6 +4,7 @@
 
 plugins {
     kotlin("multiplatform") version "2.4.20"
+    kotlin("plugin.serialization") version "2.4.20"
     // Publishing — allows consumers (e.g. the test suites) to use this via mavenLocal.
     // Multiplatform creates its publications automatically (one per target plus metadata),
     // so no publishing { } block is needed, and components["java"] doesn't exist here.
@@ -28,6 +29,10 @@ kotlin {
     sourceSets {
         commonTest.dependencies {
             implementation(kotlin("test"))
+        }
+        commonMain.dependencies {
+            // ErrorResponse is @Serializable. Core only, not json: the contract defines shapes, consumers pick the format
+            api("org.jetbrains.kotlinx:kotlinx-serialization-core:1.8.0")
         }
     }
 }
